@@ -1,0 +1,6 @@
+torch==2.8.0
+torchvision==0.23.0
+numpy>=2.0
+opencv-python>=4.10
+PyYAML>=6.0
+tqdm>=4.67
