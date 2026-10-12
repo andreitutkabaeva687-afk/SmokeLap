@@ -1,14 +1,14 @@
 # SmokeLap: Smoke-Aware Surgical Scene Segmentation
 
-This repository is the **inference and evaluation release** of SmokeLap for semantic segmentation under surgical smoke.
+This repository provides the inference and evaluation resources for SmokeLap, a semantic segmentation method designed for surgical scenes affected by smoke.
 
-SmokeLap integrates smoke estimation, temporal memory retrieval and smoke-guided prediction fusion. This public package provides the trained-model definition, dataset loader, inference pipeline, prediction visualization and the exact global-confusion-matrix evaluation used for the reported test result. Training, optimization and ablation source code are intentionally not included in this release.
+SmokeLap integrates smoke estimation, temporal memory retrieval and smoke-guided prediction fusion. The repository provides the checkpoint-compatible model definition, SmokeLap dataset loader, inference pipeline, prediction visualization tools and global-confusion-matrix evaluation used for the reported test result.
 
 ## Reported result
 
 The evaluation protocol is fixed as follows:
 
-> accumulate all valid pixels from all 3,386 test images into one 9-class confusion matrix → calculate per-class Dice/IoU → macro-average all 9 classes.
+> Accumulate all valid pixels from all 3,386 test images into one 9-class confusion matrix, calculate per-class Dice and IoU, and then macro-average across all 9 classes.
 
 | Split / smoke level | N | Dice | mIoU | PixelAcc |
 |---|---:|---:|---:|---:|
@@ -20,31 +20,13 @@ The evaluation protocol is fixed as follows:
 
 The corresponding best validation Dice is `0.4473`. The evaluation script reproduces the result files and confusion matrices locally.
 
-## Public-release scope
-
-Included:
-
-- minimal model code required to load the released checkpoint;
-- SmokeLap dataset loader;
-- full-test global confusion-matrix evaluator;
-- mask and overlay prediction script;
-- inference configuration;
-
-Not included:
-
-- training and optimization pipeline;
-- loss-function implementation;
-- ablation-training code;
-- experimental V3/V4/V5 branches;
-- private experiment queues and logs.
-
 ## Repository structure
 
 ```text
 .
 ├── configs/                 Inference/evaluation configuration
 ├── datasets/                SmokeLap dataset loader
-├── models/                  Minimal checkpoint-compatible inference model
+├── models/                  Checkpoint-compatible inference model
 ├── scripts/                 Evaluation, prediction and result-export tools
 ├── utils/                   Configuration and checkpoint utilities
 ├── checkpoints/README.md    Checkpoint location and checksum
@@ -55,8 +37,8 @@ Not included:
 ## Installation
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
-cd <YOUR_REPOSITORY_NAME>
+git clone https://github.com/andreitutkabaeva687-afk/SmokeLap.git
+cd SmokeLap
 python -m venv .venv
 ```
 
@@ -142,6 +124,4 @@ python scripts\predict_masks_and_overlays.py `
 - Test images: `3,386`
 - Metric: 9-class macro-average from one global confusion matrix
 
-## License
 
-No license is granted until the repository owner adds a license file. Add the license required by your institution and dataset agreement before making this repository public.
